@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import {
   IconArrow,
   IconBell,
@@ -21,26 +22,80 @@ const bars = [
   { h: 61, label: 'Sat' },
 ]
 
+const WORDS = ['Learning.', 'Growth.', 'Success.', 'Everything.']
+
 export default function Hero() {
+  const [wordIdx, setWordIdx] = useState(0)
+  const [visible, setVisible] = useState(false)
+  const heroRef = useRef(null)
+
+  /* word cycling */
+  useEffect(() => {
+    const id = setInterval(() => setWordIdx(i => (i + 1) % WORDS.length), 2600)
+    return () => clearInterval(id)
+  }, [])
+
+  /* entrance animation trigger */
+  useEffect(() => {
+    const t = setTimeout(() => setVisible(true), 80)
+    return () => clearTimeout(t)
+  }, [])
+
   return (
-    <section className="hero">
+    <section className="hero" ref={heroRef}>
+      {/* ambient orbs */}
+      <span className="hero-orb hero-orb-1" aria-hidden="true" />
+      <span className="hero-orb hero-orb-2" aria-hidden="true" />
+      <span className="hero-orb hero-orb-3" aria-hidden="true" />
+
       <div className="wrap">
-        <div>
-          <span className="badge"><b>🚀 No. 1</b>The No. 1 Learning Management Platform in Sri Lanka.</span>
-          <h1>Manage Learning.<span>Manage Everything.</span></h1>
-          <p className="lead">Manage your classes and students smarter with an all-in-one platform built for modern educators and institutes.</p>
-          <p className="sub">From seamless Student & Staff Management to Fees Tracking, Online Class Stores, Automated SMS, Course Materials, and QR Attendance — everything you need to run your institute, all in one place.</p>
+        {/* ── LEFT COPY ── */}
+        <div className={`hero-copy ${visible ? 'hero-copy--in' : ''}`}>
+          <span className="badge badge--animated">
+            <b>🚀 No. 1</b>The No. 1 Learning Management Platform in Sri Lanka.
+          </span>
+
+          <h1 className="hero-h1">
+            Manage{' '}
+            <span className="hero-word-swap" key={wordIdx}>
+              {WORDS[wordIdx]}
+            </span>
+            <span className="hero-h1-sub">Manage Everything.</span>
+          </h1>
+
+          <p className="lead">
+            Manage your classes and students smarter with an all-in-one platform built for modern educators and institutes.
+          </p>
+          <p className="sub">
+            From seamless Student &amp; Staff Management to Fees Tracking, Online Class Stores, Automated SMS, Course Materials, and QR Attendance — everything you need to run your institute, all in one place.
+          </p>
+
           <div className="hero-actions">
-            <a href="#cta" className="btn btn-primary">Get Started <IconArrow /></a>
-            <a href="#platform" className="btn btn-ghost">Explore Platform</a>
+            <a href="#cta" className="btn btn-primary btn--glow">
+              Get Started <IconArrow />
+            </a>
+            <a href="#platform" className="btn btn-ghost">
+              Explore Platform
+            </a>
           </div>
+
           <p className="trust">
             <IconShieldCheck />
             Built for modern educators, institutes, and learning communities.
           </p>
+
+          {/* stat pills */}
+          <div className="hero-stats">
+            <div className="hstat"><strong>1,200+</strong><span>Active Students</span></div>
+            <div className="hstat-div" />
+            <div className="hstat"><strong>98%</strong><span>Satisfaction Rate</span></div>
+            <div className="hstat-div" />
+            <div className="hstat"><strong>36+</strong><span>Institutes</span></div>
+          </div>
         </div>
 
-        <div className="visual" aria-label="360 LMS dashboard preview">
+        {/* ── RIGHT VISUAL ── */}
+        <div className={`visual ${visible ? 'visual--in' : ''}`} aria-label="360 LMS dashboard preview">
           <div className="dash">
             <div className="dash-top">
               <div className="dots"><i /><i /><i /></div>
@@ -62,18 +117,21 @@ export default function Hero() {
               <div className="dash-main">
                 <div className="dash-head"><strong>Institute Overview</strong><span>This term</span></div>
                 <div className="kpis">
-                  <div className="kpi"><small>Total Students</small><strong>1,248</strong><em>+64 this month</em></div>
-                  <div className="kpi"><small>Active Courses</small><strong>36</strong><em style={{ color: 'var(--orange-strong)' }}>8 online</em></div>
-                  <div className="kpi"><small>Staff Members</small><strong>42</strong><em style={{ color: 'var(--muted)' }}>28 teachers</em></div>
-                  <div className="kpi hot"><small>Fee Collection</small><strong>LKR 1.8M</strong><em>86% collected</em></div>
+                  <div className="kpi kpi--animate" style={{ '--d': '0ms' }}><small>Total Students</small><strong>1,248</strong><em>+64 this month</em></div>
+                  <div className="kpi kpi--animate" style={{ '--d': '80ms' }}><small>Active Courses</small><strong>36</strong><em style={{ color: 'var(--orange-strong)' }}>8 online</em></div>
+                  <div className="kpi kpi--animate" style={{ '--d': '160ms' }}><small>Staff Members</small><strong>42</strong><em style={{ color: 'var(--muted)' }}>28 teachers</em></div>
+                  <div className="kpi hot kpi--animate" style={{ '--d': '240ms' }}><small>Fee Collection</small><strong>LKR 1.8M</strong><em>86% collected</em></div>
                 </div>
                 <div className="row2">
                   <div className="panel">
                     <div className="panel-h">Attendance Overview<span style={{ color: '#15803D' }}>94%</span></div>
                     <div className="bars">
-                      {bars.map((bar) => (
+                      {bars.map((bar, i) => (
                         <div key={bar.label}>
-                          <i className={bar.pk ? 'pk' : undefined} style={{ height: `${bar.h}px` }} />
+                          <i
+                            className={bar.pk ? 'pk' : undefined}
+                            style={{ height: `${bar.h}px`, '--bi': i }}
+                          />
                           {bar.label}
                         </div>
                       ))}
@@ -89,7 +147,7 @@ export default function Hero() {
                         </linearGradient>
                       </defs>
                       <path d="M0 70 L37 62 L74 66 L111 48 L148 52 L185 34 L222 30 L260 18 L260 96 L0 96 Z" fill="url(#hp)" />
-                      <path d="M0 70 L37 62 L74 66 L111 48 L148 52 L185 34 L222 30 L260 18" fill="none" stroke="#C2410C" strokeWidth="2.5" strokeLinejoin="round" />
+                      <path d="M0 70 L37 62 L74 66 L111 48 L148 52 L185 34 L222 30 L260 18" fill="none" stroke="#C2410C" strokeWidth="2.5" strokeLinejoin="round" className="chart-line" />
                       <path d="M0 80 L37 76 L74 74 L111 70 L148 66 L185 60 L222 58 L260 52" fill="none" stroke="#FDBA74" strokeWidth="2" strokeDasharray="4 4" />
                     </svg>
                   </div>
@@ -119,15 +177,15 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="float f-qr">
+          <div className="float f-qr float--pop" style={{ '--fp': '0.3s' }}>
             <div className="ic g"><IconQr size={22} /></div>
             <div><strong>QR Attendance</strong><span className="ok">✓ Attendance recorded</span></div>
           </div>
-          <div className="float f-fee">
+          <div className="float f-fee float--pop" style={{ '--fp': '0.55s' }}>
             <div className="ic"><IconCard size={22} /></div>
             <div><strong>Fee Tracking</strong><span><b>LKR 245,000</b> collected</span></div>
           </div>
-          <div className="float f-online">
+          <div className="float f-online float--pop" style={{ '--fp': '0.75s' }}>
             <div className="ic"><IconPlay /></div>
             <div><strong>Online Classes</strong><span><b>12</b> upcoming sessions</span></div>
           </div>
