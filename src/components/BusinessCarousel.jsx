@@ -1,18 +1,18 @@
 import { useEffect, useRef, useState } from 'react'
 
 const brands = [
-  { name: 'Apex Academy',           initials: 'AA', hue: '#EA580C' },
-  { name: 'BluePeak College',       initials: 'BP', hue: '#2563EB' },
-  { name: 'Nexa Institute',         initials: 'NI', hue: '#16A34A' },
-  { name: 'Crest Learning',         initials: 'CL', hue: '#9333EA' },
-  { name: 'Future Horizon',         initials: 'FH', hue: '#0891B2' },
-  { name: 'Pearl Academy',          initials: 'PA', hue: '#DB2777' },
-  { name: 'Sapphire Campus',        initials: 'SC', hue: '#4F46E5' },
-  { name: 'City Skills',            initials: 'CS', hue: '#059669' },
-  { name: 'BrightPath',             initials: 'BP', hue: '#D97706' },
-  { name: 'Lanka Business College', initials: 'LB', hue: '#DC2626' },
-  { name: 'Summit Institute',       initials: 'SI', hue: '#7C3AED' },
-  { name: 'EduStar Academy',        initials: 'ES', hue: '#0284C7' },
+  'Apex Academy',
+  'BluePeak College',
+  'Nexa Institute',
+  'Crest Learning',
+  'Future Horizon',
+  'Pearl Academy',
+  'Sapphire Campus',
+  'City Skills',
+  'BrightPath',
+  'Lanka Business College',
+  'Summit Institute',
+  'EduStar Academy',
 ]
 
 const STATS = [
@@ -40,33 +40,23 @@ function useInView(threshold = 0.15) {
 }
 
 /* A single brand card */
-function BrandCard({ name, initials, hue }) {
+function BrandCard({ name }) {
   return (
     <div className="
-      group relative flex items-center gap-3
-      px-5 py-3.5 rounded-2xl shrink-0
-      bg-white border border-[#F0E4D8]
-      shadow-[0_2px_12px_rgba(60,30,10,.05)]
+      group relative flex items-center gap-2.5
+      px-5 py-3 rounded-xl shrink-0
+      bg-white border border-[#EDE0D4]
+      shadow-[0_2px_10px_rgba(60,30,10,.04)]
       cursor-default select-none
       transition-all duration-300
-      hover:-translate-y-1 hover:shadow-[0_12px_32px_rgba(60,30,10,.12)] hover:border-[#F0E4D8]/60
+      hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(194,65,12,.10)] hover:border-[#F97316]/30
     ">
-      {/* Colored avatar */}
-      <div
-        className="w-8 h-8 rounded-xl flex items-center justify-center text-[11px] font-extrabold text-white shrink-0 shadow-sm"
-        style={{ background: `linear-gradient(135deg, ${hue}dd, ${hue})` }}
-      >
-        {initials}
-      </div>
+      {/* Accent dot */}
+      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-b from-[#F97316] to-[#C2410C] shrink-0" />
       {/* Name */}
-      <span className="text-[#1C1410] text-[13.5px] font-semibold tracking-[-0.01em] whitespace-nowrap">
+      <span className="text-[#2C1F18] text-[13.5px] font-semibold tracking-[-0.01em] whitespace-nowrap">
         {name}
       </span>
-      {/* Hover glow */}
-      <div
-        className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-        style={{ boxShadow: `inset 0 0 0 1.5px ${hue}55` }}
-      />
     </div>
   )
 }
@@ -81,15 +71,15 @@ function Track({ items, reverse = false, speed = '30s' }) {
       onMouseLeave={() => setPaused(false)}
     >
       <div
-        className="flex gap-3 w-max py-1"
+        className="flex gap-2.5 w-max py-1"
         style={{
           animation: `${reverse ? 'marqueeRev' : 'marquee'} ${speed} linear infinite`,
           animationPlayState: paused ? 'paused' : 'running',
           willChange: 'transform',
         }}
       >
-        {[...items, ...items].map((b, i) => (
-          <BrandCard key={`${b.name}-${i}`} {...b} />
+        {[...items, ...items].map((name, i) => (
+          <BrandCard key={`${name}-${i}`} name={name} />
         ))}
       </div>
     </div>
