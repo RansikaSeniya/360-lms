@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from 'react'
 import { IconArrow, LogoMark } from './Icons.jsx'
 
 const sideItems = ['Dashboard', 'Students', 'Staff', 'Classes', 'Online Store', 'Fees', 'Attendance', 'SMS Center', 'Materials', 'Reports']
@@ -9,27 +10,64 @@ const courses = [
   { name: 'ICT for Beginners', students: 142, pct: 57 },
 ]
 const payments = [
-  { name: 'Kavindi Perera', cls: 'A/L Physics', amount: 'LKR 4,500', due: false },
-  { name: 'Sahan Fernando', cls: 'O/L Maths', amount: 'LKR 6,000', due: false },
-  { name: 'Malsha Silva', cls: 'English Lit.', amount: 'LKR 3,200', due: false },
-  { name: 'Ravindu Jayasinghe', cls: 'ICT', amount: 'LKR 5,000', due: true },
+  { name: 'Kavindi Perera',     cls: 'A/L Physics', amount: 'LKR 4,500', due: false },
+  { name: 'Sahan Fernando',     cls: 'O/L Maths',   amount: 'LKR 6,000', due: false },
+  { name: 'Malsha Silva',       cls: 'English Lit.', amount: 'LKR 3,200', due: false },
+  { name: 'Ravindu Jayasinghe', cls: 'ICT',          amount: 'LKR 5,000', due: true },
 ]
 
-export default function Showcase() {
-  return (
-    <section className="sec showcase">
-      <div className="wrap">
-        <div className="sec-head"><h2>See everything. Manage everything.</h2></div>
+/* Intersection Observer hook */
+function useInView(threshold = 0.12) {
+  const ref = useRef(null)
+  const [inView, setInView] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect() } },
+      { threshold }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [threshold])
+  return [ref, inView]
+}
 
-        <div className="bigdash" aria-label="360 LMS administration dashboard preview">
+export default function Showcase() {
+  const [ref, inView] = useInView()
+
+  return (
+    <section className="sec showcase" ref={ref}>
+      <div className="wrap">
+
+        {/* ── Heading ── */}
+        <div className={`
+          sec-head transition-all duration-700 ease-out
+          ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}
+        `}>
+          <h2>See everything. Manage everything.</h2>
+        </div>
+
+        {/* ── Dashboard preview ── */}
+        <div
+          className={`bigdash transition-all duration-1000 ease-out delay-150 ${inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-10 scale-[0.98]'}`}
+          aria-label="360 LMS administration dashboard preview"
+        >
           <aside className="side">
             <div className="logo"><LogoMark />360 LMS</div>
-            {sideItems.map((item) => (
-              <div key={item} className={item === 'Dashboard' ? 'item on' : 'item'}>{item}</div>
+            {sideItems.map((item, i) => (
+              <div
+                key={item}
+                className={`item transition-all duration-500 ease-out ${item === 'Dashboard' ? 'on' : ''} ${inView ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-3'}`}
+                style={{ transitionDelay: `${300 + i * 50}ms` }}
+              >
+                {item}
+              </div>
             ))}
           </aside>
+
           <div className="bd-main">
-            <div className="bd-head">
+            <div className={`bd-head transition-all duration-700 ease-out delay-300 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <div>
                 <h3>Good morning, Admin</h3>
                 <p>Here's what's happening across your institute today.</p>
@@ -39,13 +77,28 @@ export default function Showcase() {
                 <span className="chip dark">+ Add Student</span>
               </div>
             </div>
+
+            {/* KPIs */}
             <div className="bkpis">
-              <div className="bkpi"><small>Total Students</small><strong>1,248</strong><em>▲ 5.4% vs last month</em></div>
-              <div className="bkpi"><small>Fees Collected</small><strong>LKR 1.84M</strong><em>▲ 12.1% vs last month</em></div>
-              <div className="bkpi"><small>Avg. Attendance</small><strong>94.2%</strong><em>▲ 1.8% vs last month</em></div>
-              <div className="bkpi"><small>Outstanding Fees</small><strong>LKR 296K</strong><em className="w">48 students pending</em></div>
+              {[
+                { lbl: 'Total Students',   val: '1,248',    em: '▲ 5.4% vs last month' },
+                { lbl: 'Fees Collected',   val: 'LKR 1.84M', em: '▲ 12.1% vs last month' },
+                { lbl: 'Avg. Attendance',  val: '94.2%',    em: '▲ 1.8% vs last month' },
+                { lbl: 'Outstanding Fees', val: 'LKR 296K', em: '48 students pending', w: true },
+              ].map((k, i) => (
+                <div
+                  key={k.lbl}
+                  className={`bkpi transition-all duration-600 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
+                  style={{ transitionDelay: `${400 + i * 80}ms` }}
+                >
+                  <small>{k.lbl}</small>
+                  <strong>{k.val}</strong>
+                  <em className={k.w ? 'w' : ''}>{k.em}</em>
+                </div>
+              ))}
             </div>
-            <div className="brow">
+
+            <div className={`brow transition-all duration-700 ease-out delay-[600ms] ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div className="card">
                 <div className="card-h">
                   <h4>Fee Collection</h4>
@@ -81,14 +134,14 @@ export default function Showcase() {
                 </div>
               </div>
             </div>
-            <div className="brow2">
+
+            <div className={`brow2 transition-all duration-700 ease-out delay-[750ms] ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div className="card">
                 <h4>Course Activity</h4>
                 <table>
                   <thead>
                     <tr>
-                      <th>Course</th>
-                      <th>Students</th>
+                      <th>Course</th><th>Students</th>
                       <th style={{ width: '40%' }}>Completion</th>
                     </tr>
                   </thead>
@@ -112,12 +165,7 @@ export default function Showcase() {
                 <h4>Recent Payments</h4>
                 <table>
                   <thead>
-                    <tr>
-                      <th>Student</th>
-                      <th>Class</th>
-                      <th>Amount</th>
-                      <th>Status</th>
-                    </tr>
+                    <tr><th>Student</th><th>Class</th><th>Amount</th><th>Status</th></tr>
                   </thead>
                   <tbody>
                     {payments.map((p) => (
@@ -135,7 +183,8 @@ export default function Showcase() {
           </div>
         </div>
 
-        <div className="show-cta">
+        {/* CTA button */}
+        <div className={`show-cta transition-all duration-700 ease-out delay-[900ms] ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <a href="#cta" className="btn btn-white">Explore 360 LMS <IconArrow /></a>
         </div>
       </div>

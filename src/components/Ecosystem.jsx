@@ -100,7 +100,7 @@ export default function Ecosystem() {
 
         {/* ── Flow tags ── */}
         <div
-          className={`flow transition-all duration-700 ease-out delay-[900ms]
+          className={`flow transition-all duration-700 ease-out delay-900
             ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
         >
           {flow.flatMap((item, i) => {

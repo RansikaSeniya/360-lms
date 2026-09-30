@@ -4,14 +4,12 @@ export default function Footer() {
   return (
     <footer>
       <div className="wrap">
-        <Logo
-          href={null}
-          extra={
-            <span style={{ fontFamily: 'var(--text)', fontWeight: 400, fontSize: 14, color: 'var(--muted)', letterSpacing: 0, marginLeft: 12 }}>
-              © 2026 360 LMS. Made in Sri Lanka.
-            </span>
-          }
-        />
+        <div className="flex items-center gap-3">
+          <img src="/360logo.png" alt="360 LMS Logo" className="h-8 w-auto" />
+          <span className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-[#6B5A4E]">
+            © 2026 360 LMS. Made in Sri Lanka.
+          </span>
+        </div>
         <nav className="foot-links" aria-label="Footer">
           <a href="#platform">Platform</a>
           <a href="#solutions">Solutions</a>

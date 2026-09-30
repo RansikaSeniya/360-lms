@@ -1,20 +1,51 @@
+import { useEffect, useRef, useState } from 'react'
 import { IconBolt, IconCheckBox, IconLink, IconTrend } from './Icons.jsx'
 
 const items = [
-  { icon: IconCheckBox, title: 'Simple', text: 'Everything organized in one easy-to-use platform.' },
-  { icon: IconLink, title: 'Connected', text: 'Bring students, teachers, staff, and administrators together.' },
-  { icon: IconBolt, title: 'Automated', text: 'Reduce repetitive administrative work with smart automation.' },
-  { icon: IconTrend, title: 'Scalable', text: 'Built to grow with your institute.' },
+  { icon: IconCheckBox, title: 'Simple',    text: 'Everything organized in one easy-to-use platform.' },
+  { icon: IconLink,     title: 'Connected', text: 'Bring students, teachers, staff, and administrators together.' },
+  { icon: IconBolt,     title: 'Automated', text: 'Reduce repetitive administrative work with smart automation.' },
+  { icon: IconTrend,    title: 'Scalable',  text: 'Built to grow with your institute.' },
 ]
 
+/* Intersection Observer hook */
+function useInView(threshold = 0.2) {
+  const ref = useRef(null)
+  const [inView, setInView] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setInView(true); obs.disconnect() } },
+      { threshold }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [threshold])
+  return [ref, inView]
+}
+
 export default function Why() {
+  const [ref, inView] = useInView()
+
   return (
-    <section id="why" className="sec why">
+    <section id="why" className="sec why" ref={ref}>
       <div className="wrap">
-        <div className="sec-head"><h2>Built for the way modern institutes work.</h2></div>
+        <div className={`sec-head transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
+          <h2>Built for the way modern institutes work.</h2>
+        </div>
+        
         <div className="why-grid">
-          {items.map(({ icon: IconEl, title, text }) => (
-            <article className="why-card" key={title}>
+          {items.map(({ icon: IconEl, title, text }, i) => (
+            <article 
+              className="why-card transition-all duration-700 ease-out" 
+              key={title}
+              style={{
+                transitionDelay: `${150 + i * 100}ms`,
+                opacity: inView ? 1 : 0,
+                transform: inView ? 'translateY(0)' : 'translateY(24px)'
+              }}
+            >
               <div className="ic"><IconEl /></div>
               <h3>{title}</h3>
               <p>{text}</p>
