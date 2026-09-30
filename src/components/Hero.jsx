@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 
 /* ── lines to cycle through ── */
 const LINES = [
-  { prefix: 'Manage ', suffix: 'Learning.' },
-  { prefix: 'Manage ', suffix: 'Growth.' },
-  { prefix: 'Manage ', suffix: 'Success.' },
-  { prefix: 'Manage ', suffix: 'Everything.' },
+  { prefix: 'Manage ', suffix: 'Learning' },
+  { prefix: 'Manage ', suffix: 'Growth' },
+  { prefix: 'Manage ', suffix: 'Success' },
+  { prefix: 'Manage ', suffix: 'Everything' },
 ]
 
 /* split a string into individual letter spans for the char-drop animation */

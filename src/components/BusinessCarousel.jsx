@@ -52,7 +52,7 @@ function BrandCard({ name }) {
       hover:-translate-y-1 hover:shadow-[0_10px_28px_rgba(194,65,12,.10)] hover:border-[#F97316]/30
     ">
       {/* Accent dot */}
-      <span className="w-1.5 h-1.5 rounded-full bg-gradient-to-b from-[#F97316] to-[#C2410C] shrink-0" />
+      <span className="w-1.5 h-1.5 rounded-full bg-linear-to-b from-[#F97316] to-[#C2410C] shrink-0" />
       {/* Name */}
       <span className="text-[#2C1F18] text-[13.5px] font-semibold tracking-[-0.01em] whitespace-nowrap">
         {name}
