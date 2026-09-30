@@ -1,23 +1,12 @@
-const spokes = [
-  { width: 220, rotate: -90 },
-  { width: 323, rotate: -28.9 },
-  { width: 400, rotate: 0 },
-  { width: 323, rotate: 28.9 },
-  { width: 220, rotate: 90 },
-  { width: 323, rotate: 151.1 },
-  { width: 400, rotate: 180 },
-  { width: 323, rotate: -151.1 },
-]
-
 const nodes = [
-  { n: '01', label: 'Students', left: 415, top: 33 },
-  { n: '02', label: 'Teachers', left: 698, top: 97 },
-  { n: '03', label: 'Classes', left: 815, top: 253 },
-  { n: '04', label: 'Courses', left: 698, top: 409 },
-  { n: '05', label: 'Payments', left: 415, top: 473 },
-  { n: '06', label: 'Attendance', left: 132, top: 409 },
-  { n: '07', label: 'Communication', left: 15, top: 253 },
-  { n: '08', label: 'Analytics', left: 132, top: 97 },
+  { n: '01', label: 'Students', left: 420, top: 30 },
+  { n: '02', label: 'Teachers', left: 700, top: 100 },
+  { n: '03', label: 'Classes', left: 825, top: 260 },
+  { n: '04', label: 'Courses', left: 700, top: 425 },
+  { n: '05', label: 'Payments', left: 420, top: 485 },
+  { n: '06', label: 'Attendance', left: 125, top: 425 },
+  { n: '07', label: 'Communication', left: 10, top: 260 },
+  { n: '08', label: 'Analytics', left: 125, top: 100 },
 ]
 
 const flow = ['Students', 'Teachers', 'Classes', 'Courses', 'Payments', 'Attendance', 'Communication', 'Analytics']
@@ -26,20 +15,27 @@ export default function Ecosystem() {
   return (
     <section id="ecosystem" className="sec eco">
       <div className="wrap">
-        <div className="sec-head" style={{ marginBottom: 40 }}>
+        <div className="sec-head eco-head">
+          <span className="eyebrow">Unified ecosystem</span>
           <h2>One platform. Every part of your institute.</h2>
         </div>
 
-        <div className="orbit" aria-hidden="true">
-          <div className="ring" />
-          <div className="glow" />
-          {spokes.map((s) => (
-            <div key={s.rotate} className="spoke" style={{ width: s.width, transform: `rotate(${s.rotate}deg)` }} />
-          ))}
-          <div className="hub"><b>360</b><span>LMS</span></div>
+        <div className="ecosystem-visual" aria-label="360 LMS ecosystem overview">
+          <div className="orbit-ring ring-one" />
+          <div className="orbit-ring ring-two" />
+          <div className="orbit-ring ring-three" />
+          <div className="halo" />
+
+          <div className="core-hub">
+            <div className="core-glow" />
+            <b>360</b>
+            <span>LMS</span>
+          </div>
+
           {nodes.map((node) => (
-            <div key={node.n} className="node" style={{ left: node.left, top: node.top }}>
-              <i>{node.n}</i>{node.label}
+            <div key={node.n} className="eco-node" style={{ left: node.left, top: node.top }}>
+              <span className="eco-node-index">{node.n}</span>
+              <span>{node.label}</span>
             </div>
           ))}
         </div>
@@ -47,7 +43,7 @@ export default function Ecosystem() {
         <div className="eco-grid">
           <div className="hub-sm"><b>360</b><span>LMS</span></div>
           {nodes.map((node) => (
-            <div key={node.n} className="node"><i>{node.n}</i>{node.label}</div>
+            <div key={node.n} className="eco-node compact"><span className="eco-node-index">{node.n}</span><span>{node.label}</span></div>
           ))}
         </div>
 
