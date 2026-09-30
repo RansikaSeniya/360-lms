@@ -1,5 +1,6 @@
 import Header from './components/Header.jsx'
 import Hero from './components/Hero.jsx'
+import BusinessCarousel from './components/BusinessCarousel.jsx'
 import Platform from './components/Platform.jsx'
 import Ecosystem from './components/Ecosystem.jsx'
 import Showcase from './components/Showcase.jsx'
@@ -14,6 +15,7 @@ export default function App() {
       <Header />
       <main>
         <Hero />
+        <BusinessCarousel />
         <Platform />
         <Ecosystem />
         <Showcase />
