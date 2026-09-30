@@ -17,16 +17,19 @@ export default function BusinessCarousel() {
       <div className="wrap">
         <div className="business-header">
           <span className="eyebrow">Trusted by growing institutions</span>
-          <h2>Businesses and learning brands that scale with 360 LMS</h2>
+          <h2>Top education brands trust 360 LMS to scale smarter</h2>
         </div>
 
-        <div className="marquee" aria-hidden="true">
-          <div className="marquee-track">
-            {[...brands, ...brands].map((name, index) => (
-              <span className="marquee-item" key={`${name}-${index}`}>
-                {name}
-              </span>
-            ))}
+        <div className="marquee-shell">
+          <div className="marquee" aria-hidden="true">
+            <div className="marquee-track">
+              {[...brands, ...brands].map((name, index) => (
+                <span className="marquee-item" key={`${name}-${index}`}>
+                  <span className="marquee-dot" />
+                  {name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
