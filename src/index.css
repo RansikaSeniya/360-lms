@@ -1,4 +1,37 @@
+@import "tailwindcss";
+
+/* Custom keyframes */
+@keyframes orbDrift {
+  0%   { transform: translate(0, 0) scale(1); }
+  100% { transform: translate(30px, 20px) scale(1.08); }
+}
+
+/* Hero: each character drops in from above with slight bounce */
+@keyframes charDrop {
+  from { opacity: 0; transform: translateY(-18px) rotateX(40deg); }
+  to   { opacity: 1; transform: translateY(0) rotateX(0deg); }
+}
+
+/* Carousel: reverse direction */
+@keyframes marqueeRev {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+@keyframes floatPop {
+  from { opacity: 0; transform: translateY(14px) scale(.9); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes lineDraw {
+  to { stroke-dashoffset: 0; }
+}
+.chart-line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: lineDraw 1.2s ease 1s forwards;
+}
+
 :root{
+
   --orange:#F97316;      /* bright accent, decorative */
   --orange-strong:#C2410C; /* buttons, text on white (AA) */
   --orange-deep:#9A3412;
@@ -196,32 +229,12 @@ p{margin:0}
 .biz-stat strong{font-family:var(--display);font-size:22px;font-weight:800;color:var(--orange-strong)}
 .biz-stat span{font-size:12px;font-weight:600;color:var(--muted)}
 
-/* Marquee shell */
-.marquee-shell{position:relative;padding:14px 0;display:flex;flex-direction:column;gap:10px}
-.marquee-shell::before,.marquee-shell::after{content:"";position:absolute;top:0;bottom:0;width:140px;z-index:3;pointer-events:none}
-.marquee-shell::before{left:0;background:linear-gradient(90deg,#fffaf7 0%,rgba(255,250,247,0) 100%)}
-.marquee-shell::after{right:0;background:linear-gradient(270deg,#fffaf7 0%,rgba(255,250,247,0) 100%)}
+/* Carousel — keyframes (animation applied inline via React) */
+@keyframes marquee    { from { transform: translateX(0); }     to { transform: translateX(-50%); } }
+@keyframes marqueeRev { from { transform: translateX(-50%); }  to { transform: translateX(0); } }
 
-.marquee{position:relative;overflow:hidden;padding:6px 0}
-.marquee--rev .marquee-track--rev{animation-direction:reverse}
-.marquee-track{display:flex;gap:12px;align-items:center;white-space:nowrap;width:max-content;padding:4px 0;animation:marquee 28s linear infinite}
-.marquee-track--rev{animation:marquee 24s linear infinite reverse}
-
-.marquee-item{
-  display:inline-flex;align-items:center;gap:10px;
-  padding:12px 20px;border-radius:14px;
-  border:1px solid var(--mb, rgba(241,228,216,.9));
-  background:var(--mc, rgba(255,255,255,.96));
-  color:var(--ink);font-size:14px;font-weight:700;
-  letter-spacing:-.01em;
-  box-shadow:0 6px 18px rgba(60,30,10,.04);
-  transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease,filter .25s;
-  cursor:default;
-  white-space:nowrap;
-}
-.marquee-item:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 30px rgba(194,65,12,.10);filter:brightness(1.02)}
-.marquee-emoji{font-size:18px;line-height:1;flex-shrink:0}
-@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* 3D perspective for Hero char-drop */
+.hero-h1-perspective { perspective: 600px; }
 
 /* Sections */
 section{scroll-margin-top:76px}
