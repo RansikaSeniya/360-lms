@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 
 /* ── lines to cycle through ── */
 const LINES = [
-  { top: 'Manage Learning.',    accent: true  },
-  { top: 'Manage Growth.',      accent: true  },
-  { top: 'Manage Success.',     accent: true  },
-  { top: 'Manage Everything.',  accent: false },
+  { prefix: 'Manage ', suffix: 'Learning.' },
+  { prefix: 'Manage ', suffix: 'Growth.' },
+  { prefix: 'Manage ', suffix: 'Success.' },
+  { prefix: 'Manage ', suffix: 'Everything.' },
 ]
 
 /* split a string into individual letter spans for the char-drop animation */
@@ -63,16 +63,6 @@ export default function Hero() {
         <div className="absolute top-1/3 left-[55%] w-[300px] h-[300px] rounded-full bg-[radial-gradient(circle,rgba(249,115,22,.07)_0%,transparent_70%)] animate-[orbDrift_18s_ease-in-out_infinite_alternate]" />
       </div>
 
-      {/* ── Grid overlay ── */}
-      {/* <div
-        className="pointer-events-none absolute inset-0 opacity-[0.022]"
-        style={{
-          backgroundImage: 'linear-gradient(#C2410C 1px,transparent 1px),linear-gradient(90deg,#C2410C 1px,transparent 1px)',
-          backgroundSize: '48px 48px',
-        }}
-        aria-hidden="true"
-      /> */}
-
       {/* ── Main content ── */}
       <div className="relative z-10 max-w-5xl mx-auto px-6 pt-28 pb-32 flex flex-col items-center text-center">
 
@@ -107,27 +97,24 @@ export default function Hero() {
               className={`
                 block text-[clamp(52px,7.5vw,96px)]
                 transition-all duration-[350ms] ease-in
-                ${current.accent ? 'text-[#C2410C]' : 'text-[#1C1410]'}
                 ${phase === 'out'
                   ? 'opacity-0 -translate-y-5 blur-[2px]'
                   : 'opacity-100 translate-y-0 blur-0'
                 }
               `}
             >
-              {phase !== 'out'
-                ? <SplitText text={current.top} baseDelay={0} />
-                : current.top
-              }
+              {phase !== 'out' ? (
+                <>
+                  <SplitText text={current.prefix} baseDelay={0} className="text-[#1C1410]" />
+                  <SplitText text={current.suffix} baseDelay={current.prefix.length * 28} className="text-[#C2410C]" />
+                </>
+              ) : (
+                <>
+                  <span className="text-[#1C1410]">{current.prefix}</span>
+                  <span className="text-[#C2410C]">{current.suffix}</span>
+                </>
+              )}
             </span>
-          </span>
-
-          {/* Static second line */}
-          <span className={`
-            block text-[clamp(38px,5.2vw,68px)] text-[#1C1410]/70 mt-1
-            transition-all duration-700 ease-out delay-200
-            ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
-          `}>
-            Manage Everything.
           </span>
         </h1>
 

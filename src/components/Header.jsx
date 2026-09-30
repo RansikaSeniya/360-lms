@@ -1,10 +1,10 @@
-import { Logo } from './Icons.jsx'
-
 export default function Header() {
   return (
     <header className="nav">
       <div className="wrap">
-        <Logo />
+        <a href="/" className="flex items-center gap-2">
+          <img src="/360logo.png" alt="360 LMS Logo" className="h-15 w-auto" />
+        </a>
         <nav className="nav-links" aria-label="Main">
           <a href="#platform">Platform</a>
           <a href="#ecosystem">Features</a>
