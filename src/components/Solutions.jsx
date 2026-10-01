@@ -34,7 +34,7 @@ export default function Solutions() {
     <section id="solutions" className="sec" ref={ref}>
       <div className="wrap">
         <div className={`sec-head transition-all duration-700 ease-out ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-          <h2>Built for every learning environment.</h2>
+          <h2>Built for every learning environment</h2>
         </div>
         
         <div className="sol-grid">

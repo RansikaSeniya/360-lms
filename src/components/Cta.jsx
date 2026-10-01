@@ -44,7 +44,7 @@ export default function Cta() {
 
           <div className={`
             cta-actions
-            transition-all duration-700 ease-out delay-[450ms]
+            transition-all duration-700 ease-out delay-450
             ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
           `}>
             <a href="#" className="btn btn-white">Get Started with 360 LMS</a>

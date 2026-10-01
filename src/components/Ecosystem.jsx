@@ -56,11 +56,10 @@ export default function Ecosystem() {
           <div className="halo" />
 
           {/* Core hub — pops in */}
-          <div className={`core-hub transition-all duration-700 ease-out delay-400
+          <div className={`core-hub bg-white! transition-all duration-700 ease-out delay-400
             ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.7]'}`}>
             <div className="core-glow" />
-            <b>360</b>
-            <span>LMS</span>
+            <img src="/360logo.png" alt="360 LMS Logo" className="w-28 h-auto" />
           </div>
 
           {/* Nodes — staggered fade-slide in */}
@@ -84,7 +83,9 @@ export default function Ecosystem() {
 
         {/* ── Compact grid (mobile) ── */}
         <div className="eco-grid">
-          <div className="hub-sm"><b>360</b><span>LMS</span></div>
+          <div className="hub-sm bg-white! flex items-center justify-center">
+            <img src="/360logo.png" alt="360 LMS Logo" className="w-20 h-auto" />
+          </div>
           {nodes.map((node, i) => (
             <div
               key={node.n}

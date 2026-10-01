@@ -70,7 +70,7 @@ export default function Showcase() {
             <div className={`bd-head transition-all duration-700 ease-out delay-300 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
               <div>
                 <h3>Good morning, Admin</h3>
-                <p>Here's what's happening across your institute today.</p>
+                <p>Here's what's happening across your institute today</p>
               </div>
               <div className="acts">
                 <span className="chip">This month</span>
@@ -98,7 +98,7 @@ export default function Showcase() {
               ))}
             </div>
 
-            <div className={`brow transition-all duration-700 ease-out delay-[600ms] ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <div className={`brow transition-all duration-700 ease-out delay-600 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div className="card">
                 <div className="card-h">
                   <h4>Fee Collection</h4>
@@ -135,7 +135,7 @@ export default function Showcase() {
               </div>
             </div>
 
-            <div className={`brow2 transition-all duration-700 ease-out delay-[750ms] ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+            <div className={`brow2 transition-all duration-700 ease-out delay-750 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
               <div className="card">
                 <h4>Course Activity</h4>
                 <table>
@@ -184,7 +184,7 @@ export default function Showcase() {
         </div>
 
         {/* CTA button */}
-        <div className={`show-cta transition-all duration-700 ease-out delay-[900ms] ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
+        <div className={`show-cta transition-all duration-700 ease-out delay-900 ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <a href="#cta" className="btn btn-white">Explore 360 LMS <IconArrow /></a>
         </div>
       </div>
