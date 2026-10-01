@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from 'react'
 
+/* Nodes defined as percentages of the 1040×610 visual box */
 const nodes = [
-  { n: '01', label: 'Students',      left: 420, top: 30  },
-  { n: '02', label: 'Teachers',      left: 700, top: 100 },
-  { n: '03', label: 'Classes',       left: 825, top: 260 },
-  { n: '04', label: 'Courses',       left: 700, top: 425 },
-  { n: '05', label: 'Payments',      left: 420, top: 485 },
-  { n: '06', label: 'Attendance',    left: 125, top: 425 },
-  { n: '07', label: 'Communication', left: 10,  top: 260 },
-  { n: '08', label: 'Analytics',     left: 125, top: 100 },
+  { n: '01', label: 'Students',      xPct: 40.4, yPct: 4.9  },
+  { n: '02', label: 'Teachers',      xPct: 67.3, yPct: 16.4 },
+  { n: '03', label: 'Classes',       xPct: 79.3, yPct: 42.6 },
+  { n: '04', label: 'Courses',       xPct: 67.3, yPct: 69.7 },
+  { n: '05', label: 'Payments',      xPct: 40.4, yPct: 79.5 },
+  { n: '06', label: 'Attendance',    xPct: 12.0, yPct: 69.7 },
+  { n: '07', label: 'Communication', xPct:  1.0, yPct: 42.6 },
+  { n: '08', label: 'Analytics',     xPct: 12.0, yPct: 16.4 },
 ]
 
 const flow = ['Students','Teachers','Classes','Courses','Payments','Attendance','Communication','Analytics']
 
-/* Hook: fires once when element enters viewport */
-function useInView(threshold = 0.2) {
+function useInView(threshold = 0.15) {
   const ref = useRef(null)
   const [inView, setInView] = useState(false)
   useEffect(() => {
@@ -37,14 +37,14 @@ export default function Ecosystem() {
     <section id="ecosystem" className="sec eco" ref={sectionRef}>
       <div className="wrap">
 
-        {/* ── Header ── */}
+        {/* Header */}
         <div className={`sec-head eco-head transition-all duration-700 ease-out
           ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <span className="eyebrow">Unified ecosystem</span>
           <h2>One platform. Every part of your institute.</h2>
         </div>
 
-        {/* ── Orbit visual ── */}
+        {/* Orbit visual — percentage-positioned nodes, fully responsive */}
         <div
           className={`ecosystem-visual transition-all duration-1000 ease-out delay-200
             ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.94]'}`}
@@ -55,22 +55,22 @@ export default function Ecosystem() {
           <div className="orbit-ring ring-three" />
           <div className="halo" />
 
-          {/* Core hub — pops in */}
+          {/* Core hub */}
           <div className={`core-hub bg-white! transition-all duration-700 ease-out delay-400
             ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-[0.7]'}`}>
             <div className="core-glow" />
             <img src="/360logo.png" alt="360 LMS Logo" className="w-28 h-auto" />
           </div>
 
-          {/* Nodes — staggered fade-slide in */}
+          {/* Nodes — percentage positioned so they scale with container */}
           {nodes.map((node, i) => (
             <div
               key={node.n}
               className={`eco-node transition-all ease-out
-                ${inView ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-4 scale-95'}`}
+                ${inView ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}
               style={{
-                left: node.left,
-                top: node.top,
+                left: `${node.xPct}%`,
+                top:  `${node.yPct}%`,
                 transitionDuration: '600ms',
                 transitionDelay: `${400 + i * 80}ms`,
               }}
@@ -81,29 +81,9 @@ export default function Ecosystem() {
           ))}
         </div>
 
-        {/* ── Compact grid (mobile) ── */}
-        <div className="eco-grid">
-          <div className="hub-sm bg-white! flex items-center justify-center">
-            <img src="/360logo.png" alt="360 LMS Logo" className="w-20 h-auto" />
-          </div>
-          {nodes.map((node, i) => (
-            <div
-              key={node.n}
-              className={`eco-node compact transition-all ease-out
-                ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
-              style={{ transitionDuration: '500ms', transitionDelay: `${200 + i * 60}ms` }}
-            >
-              <span className="eco-node-index">{node.n}</span>
-              <span>{node.label}</span>
-            </div>
-          ))}
-        </div>
-
-        {/* ── Flow tags ── */}
-        <div
-          className={`flow transition-all duration-700 ease-out delay-900
-            ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}
-        >
+        {/* Flow tags */}
+        <div className={`flow transition-all duration-700 ease-out delay-900
+          ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
           {flow.flatMap((item, i) => {
             const parts = [<span key={item}>{item}</span>]
             if (i < flow.length - 1) parts.push(<em key={`${item}-arrow`}>→</em>)

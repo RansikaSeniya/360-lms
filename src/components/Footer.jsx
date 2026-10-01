@@ -5,7 +5,7 @@ export default function Footer() {
     <footer>
       <div className="wrap">
         <div className="flex items-center gap-3">
-          <img src="/360logo.png" alt="360 LMS Logo" className="h-8 w-auto" />
+          <img src="/360logo.png" alt="360 LMS Logo" className="h-13 w-auto" />
           <span className="font-['Plus_Jakarta_Sans',sans-serif] text-[14px] text-[#6B5A4E]">
             © 2026 360 LMS. Made in Sri Lanka.
           </span>
