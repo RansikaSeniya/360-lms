@@ -16,15 +16,15 @@ export default function Header() {
       {/* ── Desktop bar ── */}
       <div
         className="wrap"
-        style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', alignItems: 'center', height: 76 }}
+        style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', height: 76, position: 'relative' }}
       >
         {/* Logo — left */}
         <a href="/" className="flex items-center justify-self-start">
           <img src="/360logo.png" alt="360 LMS" className="h-10 w-auto" />
         </a>
 
-        {/* Desktop nav — centered, hidden on mobile */}
-        <nav aria-label="Main" className="hidden md:block">
+        {/* Desktop nav — absolute center, hidden on mobile */}
+        <nav aria-label="Main" className="hidden md:block absolute left-1/2 -translate-x-1/2">
           <ul className="flex items-center gap-1 list-none m-0 p-0">
             {NAV_LINKS.map(({ href, label }) => (
               <li key={href}>

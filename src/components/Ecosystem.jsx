@@ -41,7 +41,7 @@ export default function Ecosystem() {
         <div className={`sec-head eco-head transition-all duration-700 ease-out
           ${inView ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
           <span className="eyebrow">Unified ecosystem</span>
-          <h2>One platform. Every part of your institute.</h2>
+          <h2>One platform. Every part of your institute</h2>
         </div>
 
         {/* Orbit visual — percentage-positioned nodes, fully responsive */}

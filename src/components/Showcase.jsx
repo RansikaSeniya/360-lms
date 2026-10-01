@@ -54,7 +54,7 @@ export default function Showcase() {
           aria-label="360 LMS administration dashboard preview"
         >
           <aside className="side">
-            <div className="logo"><LogoMark />360 LMS</div>
+            <div className="logo"><img src="/360logo.png" alt="360 LMS Logo" className="h-15 w-auto" /></div>
             {sideItems.map((item, i) => (
               <div
                 key={item}
