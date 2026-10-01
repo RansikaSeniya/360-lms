@@ -1,61 +1,19 @@
 import { useEffect, useRef, useState } from 'react'
 
-/* Modern two-tone SVGs */
-const ModernIconUsers = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
-    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-    <circle cx="9" cy="7" r="4" className="fill-[#F97316]/20" />
-    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-  </svg>
-)
-
-const ModernIconCard = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
-    <rect x="2" y="5" width="20" height="14" rx="2" className="fill-[#F97316]/20" />
-    <line x1="2" y1="10" x2="22" y2="10" />
-  </svg>
-)
-
-const ModernIconStore = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
-    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" className="fill-[#F97316]/20" />
-    <polyline points="9 22 9 12 15 12 15 22" />
-  </svg>
-)
-
-const ModernIconChat = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
-    <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" className="fill-[#F97316]/20" />
-    <line x1="9" y1="10" x2="15" y2="10" />
-    <line x1="9" y1="14" x2="15" y2="14" />
-  </svg>
-)
-
-const ModernIconBook = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
-    <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-    <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" className="fill-[#F97316]/20" />
-  </svg>
-)
-
-const ModernIconQr = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-7 h-7">
-    <rect x="3" y="3" width="7" height="7" rx="1" className="fill-[#F97316]/20" />
-    <rect x="14" y="3" width="7" height="7" rx="1" className="fill-[#F97316]/20" />
-    <rect x="3" y="14" width="7" height="7" rx="1" className="fill-[#F97316]/20" />
-    <rect x="14" y="14" width="3" height="3" rx="0.5" />
-    <rect x="18" y="18" width="3" height="3" rx="0.5" />
-  </svg>
-)
+import studentImg from '../assets/platform/student.png'
+import feesImg from '../assets/platform/fees.png'
+import onlineClassImg from '../assets/platform/onlineclass.png'
+import smsImg from '../assets/platform/sms.png'
+import courseImg from '../assets/platform/online-course.png'
+import qrImg from '../assets/platform/qr.png'
 
 const features = [
-  { icon: ModernIconUsers, title: 'Student & Staff Management', text: 'Manage students, teachers, staff, classes, and academic information from one centralized platform.' },
-  { icon: ModernIconCard,  title: 'Fees Tracking',              text: 'Track payments, outstanding fees, transactions, and financial records with ease.' },
-  { icon: ModernIconStore, title: 'Online Class Store',         text: 'Create and manage online courses, classes, and digital learning programs.' },
-  { icon: ModernIconChat,  title: 'Automated SMS',              text: 'Keep students and parents informed with automated SMS notifications and updates.' },
-  { icon: ModernIconBook,  title: 'Course Materials',           text: 'Upload, organize, and distribute learning materials from one centralized platform.' },
-  { icon: ModernIconQr,    title: 'QR Attendance',              text: 'Record attendance quickly and accurately using QR-based attendance technology.' },
+  { img: studentImg,     title: 'Student & Staff Management', text: 'Manage students, teachers, staff, classes, and academic information from one centralized platform.' },
+  { img: feesImg,        title: 'Fees Tracking',              text: 'Track payments, outstanding fees, transactions, and financial records with ease.' },
+  { img: onlineClassImg, title: 'Online Class Store',         text: 'Create and manage online courses, classes, and digital learning programs.' },
+  { img: smsImg,         title: 'Automated SMS',              text: 'Keep students and parents informed with automated SMS notifications and updates.' },
+  { img: courseImg,      title: 'Course Materials',           text: 'Upload, organize, and distribute learning materials from one centralized platform.' },
+  { img: qrImg,          title: 'QR Attendance',              text: 'Record attendance quickly and accurately using QR-based attendance technology.' },
 ]
 
 /* Intersection Observer hook */
@@ -88,7 +46,7 @@ export default function Platform() {
         </div>
 
         <div className="features">
-          {features.map(({ icon: IconEl, title, text }, i) => (
+          {features.map(({ img, title, text }, i) => (
             <article 
               className={`feature transition-all duration-700 ease-out`}
               style={{ 
@@ -99,7 +57,9 @@ export default function Platform() {
               key={title}
             >
               <div className="feature-top">
-                <div className="ic shadow-[0_16px_28px_rgba(194,65,12,.26)]"><IconEl /></div>
+                <div className="w-14 h-14 shrink-0 shadow-none bg-transparent">
+                  <img src={img} alt={title} className="w-full h-full object-contain" />
+                </div>
                 <span className="feature-tag">Core feature</span>
               </div>
               <h3>{title}</h3>

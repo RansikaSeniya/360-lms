@@ -8,7 +8,7 @@ export default function Header() {
       >
         {/* Logo — left */}
         <a href="/" className="flex items-center gap-2 justify-self-start">
-          <img src="/360logo.png" alt="360 LMS Logo" className="h-10 w-auto" />
+          <img src="/360logo.png" alt="360 LMS Logo" className="h-15 w-auto" />
         </a>
 
         {/* Nav links — center */}
