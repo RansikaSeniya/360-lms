@@ -1,11 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
-import { IconBolt, IconCheckBox, IconLink, IconTrend } from './Icons.jsx'
+
+import simplicityImg from '../assets/simplicity.png'
+import linkImg from '../assets/link.png'
+import automationImg from '../assets/automation.png'
+import scalabilityImg from '../assets/scalability.png'
 
 const items = [
-  { icon: IconCheckBox, title: 'Simple',    text: 'Everything organized in one easy-to-use platform.' },
-  { icon: IconLink,     title: 'Connected', text: 'Bring students, teachers, staff, and administrators together.' },
-  { icon: IconBolt,     title: 'Automated', text: 'Reduce repetitive administrative work with smart automation.' },
-  { icon: IconTrend,    title: 'Scalable',  text: 'Built to grow with your institute.' },
+  { img: simplicityImg, title: 'Simple',    text: 'Everything organized in one easy-to-use platform.' },
+  { img: linkImg,       title: 'Connected', text: 'Bring students, teachers, staff, and administrators together.' },
+  { img: automationImg, title: 'Automated', text: 'Reduce repetitive administrative work with smart automation.' },
+  { img: scalabilityImg,title: 'Scalable',  text: 'Built to grow with your institute.' },
 ]
 
 /* Intersection Observer hook */
@@ -36,7 +40,7 @@ export default function Why() {
         </div>
         
         <div className="why-grid">
-          {items.map(({ icon: IconEl, title, text }, i) => (
+          {items.map(({ img, title, text }, i) => (
             <article 
               className="why-card transition-all duration-700 ease-out" 
               key={title}
@@ -46,7 +50,9 @@ export default function Why() {
                 transform: inView ? 'translateY(0)' : 'translateY(24px)'
               }}
             >
-              <div className="ic"><IconEl /></div>
+              <div className="w-16 h-16 mb-6">
+                <img src={img} alt={title} className="w-full h-full object-contain" />
+              </div>
               <h3>{title}</h3>
               <p>{text}</p>
             </article>
