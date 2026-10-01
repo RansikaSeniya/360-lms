@@ -34,7 +34,7 @@ export default function Header() {
                     transition-all duration-200 hover:text-[#C2410C] hover:bg-[#FFF1E6] group"
                 >
                   {label}
-                  <span className="absolute bottom-1 left-4 right-4 h-0.5 rounded-full bg-[#F97316]
+                  <span className="absolute bottom-1 left-4 right-4 h-[2px] rounded-full bg-[#F97316]
                     scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
                 </a>
               </li>
@@ -77,7 +77,7 @@ export default function Header() {
 
       {/* ── Mobile dropdown menu ── */}
       <div className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out
-        ${open ? 'max-h-105 opacity-100' : 'max-h-0 opacity-0'}`}>
+        ${open ? 'max-h-[420px] opacity-100' : 'max-h-0 opacity-0'}`}>
         <div className="bg-white/95 backdrop-blur-md border-t border-[#F1E4D8] px-5 py-4 flex flex-col gap-1">
           {NAV_LINKS.map(({ href, label }) => (
             <a
